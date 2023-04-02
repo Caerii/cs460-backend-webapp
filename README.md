@@ -17,3 +17,10 @@ F4. Create the list of course sections and the number of students enrolled in ea
 F5. Create the list of students enrolled in a course section taught by the professor in a given semester
 Students can do the following:
 F6. Query the list of course sections offered by dept in a given year and semester.
+
+# TODO:
+
+- [ ] Interface with the database.
+- [x] Create a Django project.
+- [x] Create a Django app.
+- [ ] 
