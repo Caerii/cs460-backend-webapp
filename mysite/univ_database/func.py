@@ -1,14 +1,35 @@
 from .models import *
+from django.db.models import Avg
+from django.db.models import Max
+from django.db.models import Min
 
-#import later on or, copy and past
+#import later on
 
-#proofesor roster
-
-def roster_prof_name(page): 
+#profesor roster 
+def roster_prof_name(): 
     return Instructor.objects.order_by('Name')
 
-def roster_prof_dept(page, dept:str): # dept represents department name as a string
-    return Instructor.objects.order_by('Dept_Name').filter(Instructor.dept_name==dept)
+def roster_prof_dept(dept:str): # dept represents department name as a string.
+    #if any department use '*'
+    return Instructor.objects.order_by('Dept_Name').filter(dept_name=dept)
 
 def roster_prof_salary(page):
     return Instructor.objects.order_by('Salary')
+
+# departmental min, max and average salaries
+
+def dept_salary_stats(dept:str):
+    max_sal = Instructor.objects.filter(dept_name = dept).aggregate(Max('salary'))[:1]
+    min_sal = Instructor.objects.filter(dept_name = dept).aggregate(Min('salary'))[:1]
+    avg_sal = Instructor.objects.filter(dept_name = dept).aggregate(Avg('salary'))[:1]
+    return [max_sal,min_sal,avg_sal]
+
+
+# professor performance functions 
+# gives list of taught courses
+def Instructor_taught(Inst_name:str,acad_year:int,semester):
+    inst_ID = Instructor.objects.filter(name = Inst_name)[:1]
+    return Teaches.objects.filter(ID = inst_ID).filter(year = acad_year).filter(semester = semester)
+
+
+    
