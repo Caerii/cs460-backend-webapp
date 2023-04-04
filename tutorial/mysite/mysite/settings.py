@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
              #       'ENGINE': 'django.db.backends.mysql',
             'ENGINE': 'mysql.connector.django',
-            'NAME': 'limbus',
+            'NAME': 'university',
             'USER': 'root',
             'PASSWORD': '123456',
             'HOST': 'localhost'
