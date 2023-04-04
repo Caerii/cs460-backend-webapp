@@ -23,4 +23,15 @@ F6. Query the list of course sections offered by dept in a given year and semest
 - [ ] Interface with the database.
 - [x] Create a Django project.
 - [x] Create a Django app.
-- [ ] 
+- [ ] Create a login/registration system.
+- [ ] Create a user interface with clean buttons and CSS styling.
+- [ ] Add CRUD functionality to the database tables.
+- [ ] Add the ability to search the database.
+- [ ] Add the ability to sort the database.
+- [ ] Add the ability to filter the database.
+- [ ] Add the ability to group the database.
+- [ ] Add the ability to aggregate the database.
+- [ ] Add customizability to the user interface.
+- [ ] Have pages for each of the types of users (admins, profs, and students).
+- [ ] Add the ability to export the database to a CSV file.
+
