@@ -19,14 +19,14 @@ def roster_prof_salary(page):
 # departmental min, max and average salaries
 
 def dept_salary_stats(dept:str):
-    max_sal = Instructor.objects.filter(dept_name = dept).aggregate(Max('salary'))[:1]
-    min_sal = Instructor.objects.filter(dept_name = dept).aggregate(Min('salary'))[:1]
-    avg_sal = Instructor.objects.filter(dept_name = dept).aggregate(Avg('salary'))[:1]
+    max_sal = Instructor.objects.filter(dept_name = dept).aggregate(Max('salary'))[0]
+    min_sal = Instructor.objects.filter(dept_name = dept).aggregate(Min('salary'))[0]
+    avg_sal = Instructor.objects.filter(dept_name = dept).aggregate(Avg('salary'))[0]
     return [max_sal,min_sal,avg_sal]
 
 
 # professor performance functions 
-# gives list of taught courses
+# gives list of taught courses in a semsester and academic year.
 def Instructor_taught(Inst_name:str,acad_year:int,semester):
     inst_ID = Instructor.objects.filter(name = Inst_name)[:1]
     return Teaches.objects.filter(ID = inst_ID).filter(year = acad_year).filter(semester = semester)

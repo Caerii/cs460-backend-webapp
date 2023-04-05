@@ -1,9 +1,11 @@
 from django.db import models
 
-class Course(models.Model): #Course table
+#ADD RELATED NAMES TO ALL FOREIGN KEYS
+
+class Course(models.Model):
     course_id = models.CharField(db_column='Course_ID', primary_key=True, max_length=6)  # Field name made lowercase.
     title = models.CharField(db_column='Title', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    dept_name = models.ForeignKey('Department', models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True)  # Field name made lowercase.
+    dept_name = models.ForeignKey('Department', models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True,related_name='course_dept')  # Field name made lowercase.
     credits = models.IntegerField(db_column='Credits', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -23,7 +25,7 @@ class Department(models.Model):
 class Instructor(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    dept_name = models.ForeignKey(Department, models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True)  # Field name made lowercase.
+    dept_name = models.ForeignKey(Department, models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True, related_name='instructor_dept')  # Field name made lowercase.
     salary = models.IntegerField(db_column='Salary', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -32,7 +34,7 @@ class Instructor(models.Model):
 
 
 class PreReq(models.Model):
-    course = models.ForeignKey(Course, models.DO_NOTHING, db_column='Course_ID', blank=True, null=True)  # Field name made lowercase.
+    course = models.ForeignKey(Course, models.DO_NOTHING, db_column='Course_ID', blank=True, null=True, related_name='Prereq_course')  # Field name made lowercase.
     prereq_id = models.CharField(db_column='Prereq_ID', max_length=6, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -41,7 +43,7 @@ class PreReq(models.Model):
 
 
 class Section(models.Model):
-    course = models.ForeignKey(Course, models.DO_NOTHING, db_column='Course_ID')  # Field name made lowercase.
+    course = models.ForeignKey(Course, models.DO_NOTHING, db_column='Course_ID', related_name='section_course_iD')  # Field name made lowercase.
     sec_id = models.IntegerField(db_column='Sec_ID')  # Field name made lowercase.
     semester = models.IntegerField(db_column='Semester')  # Field name made lowercase.
     year = models.IntegerField(db_column='Year')  # Field name made lowercase.
@@ -58,7 +60,7 @@ class Section(models.Model):
 class Student(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    dept_name = models.ForeignKey(Department, models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True)  # Field name made lowercase.
+    dept_name = models.ForeignKey(Department, models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True, related_name='Student_department')  # Field name made lowercase.
     tot_cred = models.IntegerField(db_column='Tot_Cred', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -67,11 +69,11 @@ class Student(models.Model):
 
 
 class Takes(models.Model):
-    student = models.ForeignKey(Student, models.DO_NOTHING, db_column='Student_ID')  # Field name made lowercase.
-    course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID')  # Field name made lowercase.
-    sec_id = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID')  # Field name made lowercase.
-    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester')  # Field name made lowercase.
-    year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year')  # Field name made lowercase.
+    student = models.ForeignKey(Student, models.DO_NOTHING, db_column='Student_ID',related_name='takes_student_ID')  # Field name made lowercase.
+    course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='takes_course_ID')  # Field name made lowercase.
+    sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='takes_section_ID')  # Field name made lowercase.
+    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester',related_name='takes_semester')  # Field name made lowercase.
+    year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year', related_name='takes_yeartaken')  # Field name made lowercase.
     grade = models.CharField(db_column='Grade', max_length=2, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -81,11 +83,11 @@ class Takes(models.Model):
 
 
 class Teaches(models.Model):
-    course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID')  # Field name made lowercase.
-    sec_id = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID')  # Field name made lowercase.
-    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester')  # Field name made lowercase.
-    year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year')  # Field name made lowercase.
-    teacher = models.ForeignKey(Instructor, models.DO_NOTHING, db_column='Teacher_ID')  # Field name made lowercase.
+    course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='teaches_courseID')  # Field name made lowercase.
+    sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='teaches_sectionID')  # Field name made lowercase.
+    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester', related_name='teaches_semesster')  # Field name made lowercase.
+    year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year', related_name='teaches_year')  # Field name made lowercase.
+    teacher = models.ForeignKey(Instructor, models.DO_NOTHING, db_column='Teacher_ID', related_name='teaches_teacher')  # Field name made lowercase.
 
     class Meta:
         managed = False

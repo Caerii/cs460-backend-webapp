@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'univ_database.apps.UnivDatabaseConfigdjango'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'mysql.connector.django',
         'NAME': 'university',
         'USER': 'root',
-        'PASSWORD': '312470',
+        'PASSWORD': '123456',
         'HOST': 'localhost'
     }
 }
