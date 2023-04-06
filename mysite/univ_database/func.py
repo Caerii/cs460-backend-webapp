@@ -7,7 +7,7 @@ from django.db.models import Min
 
 #profesor roster 
 def roster_prof_name(): 
-    return Instructor.objects.order_by('Name')
+    return Instructor.objects.order_by('name')
 
 def roster_prof_dept(dept:str): # dept represents department name as a string.
     #if any department use '*'
