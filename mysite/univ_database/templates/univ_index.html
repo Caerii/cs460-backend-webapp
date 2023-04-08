@@ -1,15 +1,22 @@
 {% load static %}
 
-{%if prof_list %}
+{% if prof_list %}
+<table>
     <tr>
-        <th> prof name</th>
-    </tr>
-    {% for prof in prof_list%}
-        <tr>
-            <th>{{ prof.name }}</th>
-        </tr>
-    {%endfor%}
-{%else%}
-    <p> no professors available. </p>
+        <td> prof name</td>
+        {% for prof in prof_list %}
+            <td>{{ prof.name }}</td>
 
+        {%endfor%}
+    </tr>
+    <tr>
+        <td> prof ID</td>
+        {% for prof in prof_list %}
+            <td>{{ prof.id }}</td>
+            
+        {%endfor%}
+    </tr>
+</table>
+{%else%}
+<p> There are no professors </p>
 {%endif%}

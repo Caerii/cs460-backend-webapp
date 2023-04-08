@@ -28,6 +28,9 @@ class Instructor(models.Model):
     dept_name = models.ForeignKey(Department, models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True, related_name='instructor_dept')  # Field name made lowercase.
     salary = models.IntegerField(db_column='Salary', blank=True, null=True)  # Field name made lowercase.
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         managed = False
         db_table = 'instructor'
