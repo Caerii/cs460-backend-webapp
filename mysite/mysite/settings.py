@@ -78,10 +78,11 @@ DATABASES = {
     'default': {
 #       'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'mysql.connector.django',
-        'NAME': 'university',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': 'localhost'
+        'NAME': 'university_group_h',
+        'USER': 'group_h',
+        'PASSWORD': 'AliMatMatCon',
+        'HOST': '128.153.13.175',
+        'PORT' : '3306'
     }
 }
 

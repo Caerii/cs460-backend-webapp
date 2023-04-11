@@ -32,7 +32,7 @@ def dept_salary_stats(dept:str):
 # professor performance functions 
 def Instructor_taught(Inst_name:str,acad_year:int,semester):
     """gives list of taught courses in a semsester and academic year."""
-    inst_ID = Instructor.objects.filter(name = Inst_name)[:1]
+    inst_ID = Instructor.objects.filter(name = Inst_name)[0]
     return Teaches.objects.filter(ID = inst_ID).filter(year = acad_year).filter(semester = semester)
 
 
