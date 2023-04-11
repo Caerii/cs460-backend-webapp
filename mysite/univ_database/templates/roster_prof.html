@@ -1,0 +1,23 @@
+<h1>User:</h1>
+<h2>UserType:admin</h2>
+<p>Professor Index</p>
+
+{%if prof_list%} <!--Case for if professor list can be found-->
+<table>
+    <tr>
+        <td> Professor Name </td>
+        <td> Department </td>
+        <td> Professor Id </td>
+
+    </tr>
+    {% for prof in prof_list %}
+        <tr>
+            <td>{{ prof.name }}</td>
+            <td>{{ prof.dept_name }}</td>
+            <td>{{ prof.id }}
+        </tr>
+    {% endfor %}
+</table>
+{%else%}
+<p>No professors found, check database</p>
+{%endif%}

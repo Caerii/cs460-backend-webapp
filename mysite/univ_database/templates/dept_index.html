@@ -1,0 +1,21 @@
+<h1>User:{{username}}</h1>
+<h2>UserType:administration</h2>
+<p>Departmental Salary Index</p>
+
+{%if departments%}
+    <table>
+        <tr>
+            <td>Department</td>
+        </tr>
+
+        {%for dept in departments%}
+        <tr>
+            <td><a href= "/univ/dept_salary/{{dept.name}}" > {{dept.name}}</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+{%else%}
+<p> There are no, departments. Database Error </p>
+
+{%endif%}

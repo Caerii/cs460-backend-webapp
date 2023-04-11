@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <style>
+            table,th,td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+</html>
+
+<h1>User:{{username}}</h1>
+<h2>UserType:administration</h2>
+<p>{{department}} Department Overview</p>
+
+{%if instructors%}
+<h3>Salary Statistics</h3>
+<table>
+    <tr>
+        <td>Max :${{salary__max}} </td>
+        <td>Min :${{salary__min}} </td>
+        <td>Avg :${{salary__avg}} </td>
+</table>
+<h3>Instructor List</h3>
+<table>
+    <tr>
+        <td><h3>ID<h3></td>
+        <td><h3>Name<h3></td>
+        <td><h3>Salary<h3></td>
+    </tr>
+ 
+    {%for inst in instructors%}
+    <tr>
+        <td><a>{{inst.id}}</a></td>
+        <td>{{inst.name}}</td>
+        <td>{{inst.salary}}<td>
+    {%endfor%}
+{%else%}
+<p>Department does not exist, or has no instructors</p>
+{%endif%}

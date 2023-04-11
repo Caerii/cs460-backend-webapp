@@ -5,6 +5,7 @@ from django.db.models import Min
 
 #import later on
 
+
 def roster_prof_name(): 
     """get query list of professors by name """
     return Instructor.objects.order_by('name')
@@ -21,13 +22,13 @@ def roster_prof_salary():
 
 # departmental min, max and average salaries
 
-def dept_salary_stats(dept:str):
-    """get list of instructor stats, with first entry being max, second being min, and third being average"""
-    max_sal = Instructor.objects.filter(dept_name = dept).aggregate(Max('salary'))
-    min_sal = Instructor.objects.filter(dept_name = dept).aggregate(Min('salary'))
-    avg_sal = Instructor.objects.filter(dept_name = dept).aggregate(Avg('salary'))
-    return [max_sal,min_sal,avg_sal]
+def roster_department():
+    """Returns a query of avaliable departments"""
+    return Department.objects.order_by('name')
 
+def dept_Instructors(dept:str):
+    """Returns querryset of departmental instructors"""
+    return Instructor.objects.filter(dept_name = dept)
 
 # professor performance functions 
 def Instructor_taught(Inst_name:str,acad_year:int,semester):

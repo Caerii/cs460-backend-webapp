@@ -18,6 +18,9 @@ class Department(models.Model):
     building = models.CharField(db_column='Building', max_length=10, blank=True, null=True)  # Field name made lowercase.
     budget = models.IntegerField(db_column='Budget', blank=True, null=True)  # Field name made lowercase.
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         managed = False
         db_table = 'department'
