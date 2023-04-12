@@ -36,5 +36,8 @@ def Instructor_taught(Inst_name:str,acad_year:int,semester):
     inst_ID = Instructor.objects.filter(name = Inst_name)[0]
     return Teaches.objects.filter(ID = inst_ID).filter(year = acad_year).filter(semester = semester)
 
+def roster_courses():
+    """gives list of course with optinal"""
+    return Course.objects.order_by('dept_name')
 
     

@@ -9,6 +9,7 @@ urlpatterns = [
     path('prof_roster/', views.roster_prof.as_view(), name='Professor roster'), #F1
         #F2
     path('dept/', views.dept_index, name = 'Department Index'),
-    path('dept/<str:dept>',views.dept_overview, name ="Department overview") 
-    #path('prof_perfomance', tbd, name = 'Professor Performance'), #F3
+    path('dept/<str:dept>',views.dept_overview, name ="Department overview") ,
+    path('courses/', views.course_index, name = 'Course Index'), #F3
 ]
+

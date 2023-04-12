@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import generic
 from .func import *
@@ -33,7 +33,7 @@ def dept_overview(request,dept:str):
     template_name ='dept_view.html'
     username = 'TEST'
     instructors = dept_Instructors(dept)
-    max_sal = instructors.aggregate(Max('salary'))#aggregate returns dict object
+    max_sal = instructors.aggregate(Max('salary'))
     min_sal = instructors.aggregate(Min('salary'))
     avg_sal = instructors.aggregate(Avg('salary'))
 
@@ -44,11 +44,11 @@ def dept_overview(request,dept:str):
     
     return render(request, template_name, dictonary)
 
+def course_index(request):
+    template_name="course_index.html"
+    username='Test'
+    courses = roster_courses()
+    print(courses)
+    dictonary = {'username':username,'courses':courses}
 
-
-
-
-
-
-
-        
+    return render(request, template_name, dictonary)

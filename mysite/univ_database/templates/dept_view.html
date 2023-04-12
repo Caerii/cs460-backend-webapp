@@ -20,20 +20,23 @@
         <td>Min :${{salary__min}} </td>
         <td>Avg :${{salary__avg}} </td>
 </table>
+
 <h3>Instructor List</h3>
+
 <table>
     <tr>
         <td><h3>ID<h3></td>
         <td><h3>Name<h3></td>
         <td><h3>Salary<h3></td>
     </tr>
- 
     {%for inst in instructors%}
     <tr>
         <td><a>{{inst.id}}</a></td>
         <td>{{inst.name}}</td>
         <td>{{inst.salary}}<td>
+    </tr>
     {%endfor%}
+</table>
 {%else%}
 <p>Department does not exist, or has no instructors</p>
 {%endif%}
