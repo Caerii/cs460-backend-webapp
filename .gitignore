@@ -11,3 +11,9 @@ mysite/mysite/__pycache__/settings.cpython-311.pyc
 mysite/mysite/__pycache__/urls.cpython-311.pyc
 mysite/mysite/__pycache__/views.cpython-311.pyc
 mysite/mysite/__pycache__/wsgi.cpython-311.pyc
+*.pyc
+mysite/mysite/__pycache__/wsgi.cpython-311.pyc
+mysite/mysite/__pycache__/views.cpython-311.pyc
+mysite/mysite/__pycache__/urls.cpython-311.pyc
+mysite/mysite/__pycache__/settings.cpython-311.pyc
+mysite/mysite/__pycache__/__init__.cpython-311.pyc
