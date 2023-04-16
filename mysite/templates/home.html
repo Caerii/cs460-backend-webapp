@@ -4,9 +4,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  
+  {% include "header.html"%}
+  <p>{{user.user_data.User_type}}</p>
+  {% if user.user_data.user_type == 1 %}
+  <p>Please click this <a href = '/univ/'>link</a> to the administration home</p>
+  {% endif %}
+
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>

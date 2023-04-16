@@ -1,0 +1,7 @@
+.body{
+    flex:0
+    position: relative
+    background-color: white;
+    padding:20px;
+    width: 100%;
+}

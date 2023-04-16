@@ -1,6 +1,23 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #ADD RELATED NAMES TO ALL FOREIGN KEYS
+
+class User_Data(models.Model):
+    """Extending users to have types"""
+    ADMINISTRATION = 1
+    INSTRUCTOR = 2
+    STUDENT = 3
+
+    USERS = (
+        (ADMINISTRATION,'Administration'),
+        (INSTRUCTOR, 'Instructor'),
+        (STUDENT, 'Student')
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_type = models.PositiveSmallIntegerField(choices=USERS, blank=True, null = True)
+    
 
 class Course(models.Model):
     course_id = models.CharField(db_column='Course_ID', primary_key=True, max_length=6)  # Field name made lowercase.

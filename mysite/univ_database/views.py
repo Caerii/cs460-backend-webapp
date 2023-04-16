@@ -8,9 +8,11 @@ from .models import *
 
 def admin_home(request):
     """Class view for admin home screen"""
+    user = request.user
     username = 'TEST'
+    usertype = 'administration'
     template_name = 'admin_home.html'
-    return render(request, template_name, {'username': username})
+    return render(request, template_name, {'username': username , 'usertype':usertype})
 
 class roster_prof(generic.ListView):
     """View for viewing list of professors"""
@@ -48,7 +50,6 @@ def course_index(request):
     template_name="course_index.html"
     username='Test'
     courses = roster_courses()
-    print(courses)
     dictonary = {'username':username,'courses':courses}
 
     return render(request, template_name, dictonary)

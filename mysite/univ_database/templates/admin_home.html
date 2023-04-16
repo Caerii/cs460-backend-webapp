@@ -1,8 +1,15 @@
-<h1> Admin User: {{username}} </h1>
-<button name="button1" oneclick="location.href = '/'"> Logout </button>
+{%extends 'base.html'%}
 
-<Table>
-    <tr><td><a href="prof_roster/">Instructor Index</a><td></tr>
-    <tr><td><a href="dept/">Department Index</a><td></tr>
-    <tr><td><a href="courses/">Course Index</a?<td></tr>
-</Table>
+{%block content%}
+
+{%include 'header.html'%}
+
+<div class = "body">
+    <Table>
+        <tr><td><a href="prof_roster/">Instructor Index</a><td></tr>
+        <tr><td><a href="dept/">Department Index</a><td></tr>
+        <tr><td><a href="courses/">Course Index</a?<td></tr>
+    </Table>
+</div>
+
+{% endblock %}

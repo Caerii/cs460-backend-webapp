@@ -1,22 +1,23 @@
-<h1>User:{{username}}</h1>
-<h2>UserType:administration</h2>
-<h3>Course Overview</h3>
-{%if courses%}
-<table>
-    <tr>
-        <td>Course Number</td>
-        <td>Course Title</td>
-        <td>Credit Hours</td>
-    </tr>
-    {%for course in courses%}
-    <tr>
-        <td>{{course.course_id}}</td>
-        <td>{{course.title}}</td>
-        <td>{{course.credits}}</td>
-    </tr>
-    {%endfor%}
-</table>
-{%else%}
-<p>There are no courses, database error</p>
-{%endif%}
-
+{%extends "base.html"%}
+{%block content%}
+<div class = 'body'>
+    {%if courses%}
+    <table>
+        <tr>
+            <td>Course Number</td>
+            <td>Course Title</td>
+            <td>Credit Hours</td>
+        </tr>
+        {%for course in courses%}
+        <tr>
+            <td>{{course.course_id}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.credits}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+    {%else%}
+    <p>There are no courses, database error</p>
+    {%endif%}
+</div>
+{%endblock%}
