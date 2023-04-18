@@ -23,7 +23,7 @@ from . import views
 
 urlpatterns = [
     #path('', views.index, name='index'),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.index, name='login'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('univ/', include('univ_database.urls'))
