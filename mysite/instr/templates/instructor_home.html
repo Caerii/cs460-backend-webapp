@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>the is the instructor home page</p>
+
+<form name = "sec_query" method="POST">
+
+    {% csrf_token %}
+    <label for="name">Professor Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="semester">Semester:</label><br>
+    <input type="text" id="semester" name="semester">
+    <button type = submit name = "sec_query">Search</button>
+
+</form>
+<br>
+<form name = "stud_query" method="POST">
+
+    {% csrf_token %}
+    <label for="course">Course Name:</label><br>
+    <input type="text" id="course" name="course"><br>
+    <label for="section">Section:</label><br>
+    <input type="text" id="section" name="section"><br>
+    <label for="semester2">Semester:</label><br>
+    <input type="text" id="semester2" name="semester2"><br>
+    <label for="year">Year:</label><br>
+    <input type="text" id="year" name="year">
+    <button type = submit name = "stud_query">Search</button>
+
+</form>
+
+</body>
+</html>

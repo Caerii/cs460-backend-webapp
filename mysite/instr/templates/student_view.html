@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{%if student_list%}
+<table>
+    <tr>
+        <td> Student Id </td>
+        <td> Student Name </td>
+        <td> Department </td>
+        <td> Credits </td>
+
+    </tr>
+    {% for student in student_list %}
+    <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.dept_name }}</td>
+        <td>{{ student.tot_cred }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{%else%}
+<p>No students found, check database</p>
+{%endif%}
+
+</body>
+</html>

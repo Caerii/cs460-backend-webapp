@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'univ_database.apps.UnivDatabaseConfigdjango'
-]
+    'univ_database.apps.UnivDatabaseConfigdjango',
+    'stud.apps.StudConfig',
+    'instr.apps.InstrConfig'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

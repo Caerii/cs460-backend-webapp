@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{%if section_list%}
+<table>
+    <tr>
+        <td> Course Name </td>
+        <td> Section Id </td>
+        <td> Semester </td>
+        <td> Year </td>
+        <td> Building </td>
+        <td> Room </td>
+        <td> Capacity </td>
+        <td> Class Size </td>
+
+    </tr>
+    {% for section in section_list %}
+    <tr>
+        <td>{{ section.course_id }}</td>
+        <td>{{ section.sec_id }}</td>
+        <td>{{ section.semester }}</td>
+        <td>{{ section.year }}</td>
+        <td>{{ section.building }}</td>
+        <td>{{ section.room }}</td>
+        <td>{{ section.capacity }}</td>
+        <td>{{ section.class_size }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{%else%}
+<p>No sections found, check database</p>
+{%endif%}
+
+</body>
+</html>

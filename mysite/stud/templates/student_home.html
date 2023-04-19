@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<h1> Student User: {{username}} </h1>
+<!--<button name="button1" oneclick="location.href = '/'"> Logout </button>-->
+
+<form name = "query" method="POST">
+
+  {% csrf_token %}
+  <label for="semester">Semester:</label><br>
+  <input type="text" id="semester" name="semester"><br>
+  <label for="year">Year:</label><br>
+  <input type="text" id="year" name="year">
+  <button type = submit>Search</button>
+
+</form>
+
+<Table>
+  <tr><td><a href="sections/">View Sections</a><td></tr>
+</Table>
+</html>
