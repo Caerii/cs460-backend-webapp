@@ -1,7 +1,10 @@
 {%extends 'base.html'%}
+
 {%block content%}
+'
 {%include "header.html"%}
 <div class= "body">
+
 {%if prof_list%} <!--Case for if professor list can be found-->
 <table>
     <tr>
@@ -14,12 +17,13 @@
         <tr>
             <td>{{ prof.name }}</td>
             <td>{{ prof.dept_name }}</td>
-            <td>{{ prof.id }}
+            <td>{{ prof.id }}</td>
         </tr>
     {% endfor %}
 </table>
 {%else%}
-<p>No professors found, check database</p>
+<p>No professors found, database error</p>
 {%endif%}
+
 </div>
 {%endblock%}

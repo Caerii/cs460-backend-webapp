@@ -10,6 +10,7 @@ urlpatterns = [
         #F2
     path('dept/', views.dept_index, name = 'Department Index'),
     path('dept/<str:dept>',views.dept_overview, name ="Department overview") ,
-    path('courses/', views.course_index, name = 'Course Index'), #F3
+    path('courses/', views.course_index, name = 'Course Index'), 
+    path('perf/', views.prof_perf, name = 'Perfomance Search'), #F3
 ]
 

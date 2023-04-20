@@ -1,10 +1,13 @@
 from django.db import models
+from viewflow.fields import CompositeKey
 from django.contrib.auth.models import User
+
+
 
 #ADD RELATED NAMES TO ALL FOREIGN KEYS
 
 class User_Data(models.Model):
-    """Extending users to have types"""
+    """Extending users to have types, and ids"""
     ADMINISTRATION = 1
     INSTRUCTOR = 2
     STUDENT = 3
@@ -16,7 +19,11 @@ class User_Data(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.PositiveSmallIntegerField(choices=USERS, blank=True, null = True)
+    user_type = models.PositiveSmallIntegerField(choices=USERS, db_column='user_type', blank=True, null = True)
+    user_id = models.IntegerField(db_column='user_id',blank=True,null=True) #blank and null for prototyping purposes
+
+    class Meta:
+        abstract = True
     
 
 class Course(models.Model):
@@ -24,6 +31,9 @@ class Course(models.Model):
     title = models.CharField(db_column='Title', max_length=50, blank=True, null=True)  # Field name made lowercase.
     dept_name = models.ForeignKey('Department', models.DO_NOTHING, db_column='Dept_Name', blank=True, null=True,related_name='course_dept')  # Field name made lowercase.
     credits = models.IntegerField(db_column='Credits', blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self):
+        return self.course_id
 
     class Meta:
         managed = False
@@ -92,6 +102,7 @@ class Student(models.Model):
 
 
 class Takes(models.Model):
+    id = CompositeKey(columns=[('student', 'course', 'sec', 'semester', 'year')])
     student = models.ForeignKey(Student, models.DO_NOTHING, db_column='Student_ID',related_name='takes_student_ID')  # Field name made lowercase.
     course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='takes_course_ID')  # Field name made lowercase.
     sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='takes_section_ID')  # Field name made lowercase.
@@ -106,11 +117,15 @@ class Takes(models.Model):
 
 
 class Teaches(models.Model):
+    id = CompositeKey(columns=['course', 'sec', 'semester', 'year', 'teacher'])
     course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='teaches_courseID')  # Field name made lowercase.
     sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='teaches_sectionID')  # Field name made lowercase.
-    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester', related_name='teaches_semesster')  # Field name made lowercase.
+    semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester', related_name='teaches_semester')  # Field name made lowercase.
     year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year', related_name='teaches_year')  # Field name made lowercase.
     teacher = models.ForeignKey(Instructor, models.DO_NOTHING, db_column='Teacher_ID', related_name='teaches_teacher')  # Field name made lowercase.
+
+    def __str__(self):
+        return str(self.course.course_id)
 
     class Meta:
         managed = False

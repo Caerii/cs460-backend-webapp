@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import generic
+from .form import *
 from .func import *
 from .models import *
 
@@ -48,8 +49,42 @@ def dept_overview(request,dept:str):
 
 def course_index(request):
     template_name="course_index.html"
-    username='Test'
+    username=request.user.username
     courses = roster_courses()
     dictonary = {'username':username,'courses':courses}
 
     return render(request, template_name, dictonary)
+
+def prof_perf(request):
+    template_name="perf_search.html"
+    dictonary={}
+    method = request.method
+    dictonary.update({'method':method})
+    if request.method == "POST": 
+        form = prof_perf_form(request.POST)
+        if form.is_valid():
+            try:
+                inst=Instructor.objects.filter(name=form.data['pname']) #dangerously assuming that there will only be one result(just for now)
+                print(inst)
+                if not(inst.exists()):
+                    raise ValueError('Professor Does Not Exist')
+                Teach=Teaches.objects.filter(teacher__id=inst[0].id)
+                print(Teach)
+                if not(Teach.exists()):
+                    raise ValueError('Professor did not teach any classes this semester')
+                dictonary.update({"Teach":Teach})
+                
+            except ValueError as err:
+                dictonary.update({'Error':err})
+
+
+    else:
+        form = prof_perf_form()
+
+    dictonary.update({"form":form})
+
+    return render(request, template_name, dictonary)
+
+
+
+    

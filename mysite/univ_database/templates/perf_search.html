@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+{%block content%}
+
+{%include "header.html"%}
+
+    <h2>Professor Performance Search</h2>
+    <form action='' method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit Query">
+    </form>
+    {%if method == "POST" %}
+    <!--Post method-->
+        {%if Error%}
+        <h2 Style="color:red">Error:{{Error}}</h2>
+        {%else%}
+        <table>
+            <tr>
+                <td>ClassID</td>
+                <td>Section</td>
+            <tr>
+            {%for Te in Teach%}
+            
+            <tr><td>row</td>
+                <td>{{Te.course_id.all}}</td>
+                <td>{{Te.sec.sec_id}}</td>
+            </tr>
+            {% endfor%}
+        </table>
+        {%endif%}
+    {%endif%}
+</div>
+{%endblock%}
