@@ -4,30 +4,73 @@
 {%include "header.html"%}
 
     <h2>Professor Performance Search</h2>
-    <form action='' method="post">
+    {{form.non_feild_errors}}
+    <form names='prof_perf_form' method="POST">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Submit Query">
+        {% comment %} <label for='pname'>Professor Name:</label>
+        <input type='text' id='pname' name='pname'><br>
+        <label for='pyear'>Class Year:</label>
+        <input type='number' id='year' name='year'><br>
+        <label for'sem'>Class Semester:</label>
+        <select name='sem' id='sem'>
+            <option value='1'>Fall</option>
+            <option value='2'>Spring</option>
+        </select><br> {% endcomment %}
+        <label for='pname'>Professor Name:</label>
+        {{form.pname}} <br>
+        <label for='year'>Class Year:</label>
+        {{form.year}}<br>
+        <label for'sem'>Class Semester:</label>
+        {{form.sem}} <br>
+        <input type="submit" name='prof_perf_form' value="Submit Query">
     </form>
+
     {%if method == "POST" %}
     <!--Post method-->
-        {%if Error%}
-        <h2 Style="color:red">Error:{{Error}}</h2>
+        <div class='perf_tables'>
+        {%if ClassError%}
+        <h2 Style="color:red">Error:{{ClassError}}</h2>
         {%else%}
+            <div class='perf_classes'>
+                <p> Courses By Professor</p>
+                <table>
+                    <tr>
+                        <td>ClassID</td>
+                        <td>Section</td>
+                    <tr>
+                    {%for Te in Teach%}
+                    <tr>
+                        <td>{{Te.course_id}}</td>
+                        <td>{{Te.sec_id}}</td>
+                    </tr>
+                {% endfor%}
+                </table>
+        {%endif%}
+    </div>
+
+    <div class='perf_papers'>
+        <p>Paper By Professor</p>
+        {%if PaperError%}
+        <h2 Style="color:red">Error:{{PaperError}}</h2>
+    </div>
+        {%else%}
+
         <table>
             <tr>
-                <td>ClassID</td>
-                <td>Section</td>
-            <tr>
-            {%for Te in Teach%}
-            
-            <tr><td>row</td>
-                <td>{{Te.course_id.all}}</td>
-                <td>{{Te.sec.sec_id}}</td>
+                <td>Paper Title</td>
+                <td>Paper Budget</td>
+                <td>Paper Publish Date</td>
             </tr>
-            {% endfor%}
+            {%for pap in papers%}
+            <tr>
+                <td>{{pap.paper_title}}</td>
+                <td>${{pap.budget}}</td>
+                <td>{{pap.publish_date}}</td>
+            </tr>
+            {%endfor%}
         </table>
+    </div>
         {%endif%}
-    {%endif%}
 </div>
+{%endif%}
 {%endblock%}

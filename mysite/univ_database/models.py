@@ -102,7 +102,6 @@ class Student(models.Model):
 
 
 class Takes(models.Model):
-    id = CompositeKey(columns=[('student', 'course', 'sec', 'semester', 'year')])
     student = models.ForeignKey(Student, models.DO_NOTHING, db_column='Student_ID',related_name='takes_student_ID')  # Field name made lowercase.
     course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='takes_course_ID')  # Field name made lowercase.
     sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='takes_section_ID')  # Field name made lowercase.
@@ -117,17 +116,24 @@ class Takes(models.Model):
 
 
 class Teaches(models.Model):
-    id = CompositeKey(columns=['course', 'sec', 'semester', 'year', 'teacher'])
     course = models.ForeignKey(Section, models.DO_NOTHING, db_column='Course_ID', related_name='teaches_courseID')  # Field name made lowercase.
     sec = models.ForeignKey(Section, models.DO_NOTHING, db_column='Sec_ID', related_name='teaches_sectionID')  # Field name made lowercase.
     semester = models.ForeignKey(Section, models.DO_NOTHING, db_column='Semester', related_name='teaches_semester')  # Field name made lowercase.
     year = models.ForeignKey(Section, models.DO_NOTHING, db_column='Year', related_name='teaches_year')  # Field name made lowercase.
     teacher = models.ForeignKey(Instructor, models.DO_NOTHING, db_column='Teacher_ID', related_name='teaches_teacher')  # Field name made lowercase.
 
-    def __str__(self):
-        return str(self.course.course_id)
-
     class Meta:
         managed = False
         db_table = 'teaches'
         unique_together = (('course', 'sec', 'semester', 'year', 'teacher'),)
+
+class Papers(models.Model):
+    doi_id = models.CharField(db_column='DOI', primary_key=True, max_length=100)  # Field name made lowercase.
+    researcher_id = models.ForeignKey(Instructor, models.DO_NOTHING, db_column='Researcher_id', blank=True, null=True)  # Field name made lowercase.
+    paper_title = models.CharField(db_column='Paper_Title', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    publish_date = models.DateField(db_column='Publish_date', blank=True, null=True)  # Field name made lowercase.
+    budget = models.IntegerField(db_column='Budget', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'papers'

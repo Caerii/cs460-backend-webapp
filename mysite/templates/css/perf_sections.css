@@ -1,0 +1,20 @@
+.perf_tables{
+    display: flex;
+    font-family: Arial, sans-serif;
+    flex-direction: row;
+    font-size: 15px;
+    padding: 0px;
+    width: 100%;
+}
+
+.perf_tables > div{
+    margin: 14px;
+}
+
+.perf_classes{
+
+}
+
+.perf_papers{
+
+}

@@ -4,11 +4,12 @@
   <head>
     <meta charset="utf-8">
     <style>
+      {% comment %} using css this way was due to static not wanting to work {% endcomment %}
       {%include "css/header.css"%}
       {%include "css/body.css"%}
       {%include "css/base.css"%}
+      {%include "css/perf_sections.css"%}
     </style>
-    <!-- Put stylesheets here -->
   </head>
   <body>
       {% block content %}

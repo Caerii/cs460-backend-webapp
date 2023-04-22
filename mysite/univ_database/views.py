@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import generic
+from django.db import DatabaseError
 from .form import *
 from .func import *
 from .models import *
@@ -59,29 +60,37 @@ def prof_perf(request):
     template_name="perf_search.html"
     dictonary={}
     method = request.method
+        
     dictonary.update({'method':method})
-    if request.method == "POST": 
+    if request.method == "POST":
         form = prof_perf_form(request.POST)
-        if form.is_valid():
+        dictonary.update({'form':form})
+        post=request.POST
+        if 'prof_perf_form' in request.POST:
+            #print(form['pname'].value())
+            #print(type(form['pname'].value()))
             try:
-                inst=Instructor.objects.filter(name=form.data['pname']) #dangerously assuming that there will only be one result(just for now)
-                print(inst)
-                if not(inst.exists()):
-                    raise ValueError('Professor Does Not Exist')
-                Teach=Teaches.objects.filter(teacher__id=inst[0].id)
-                print(Teach)
-                if not(Teach.exists()):
-                    raise ValueError('Professor did not teach any classes this semester')
-                dictonary.update({"Teach":Teach})
-                
+                prof = Instructor.objects.filter(name=form['pname'].value())
+                if not(prof):
+                    raise ValueError("No Instructor Found")
+                prof_id=prof[0].id
+                Teach = roster_prof_classes(prof_id,form['year'].value(),form['sem'].value())
+                dictonary.update({'Teach':Teach})
             except ValueError as err:
-                dictonary.update({'Error':err})
+                dictonary.update({'ClassError':err})
+            except DatabaseError as err:
+                dictonary.update({'ClassError':err})
 
-
+            #try:
+            papers=roster_prof_paper(prof_id)
+            dictonary.update({'papers':papers})
+            # except ValueError as err:
+            #     dictonary.update({'PaperError':err})
+            # except DatabaseError as err:
+            #     dictonary.update({'PaperError':err})
     else:
         form = prof_perf_form()
-
-    dictonary.update({"form":form})
+        dictonary.update({'form':form})
 
     return render(request, template_name, dictonary)
 
