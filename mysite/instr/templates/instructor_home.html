@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>the is the instructor home page</p>
+{%extends 'base.html'%}
 
+{%block content%}
+
+{%include 'header.html'%}
+<body>
+<br>
 <form name = "sec_query" method="POST">
 
     {% csrf_token %}
@@ -34,4 +34,5 @@
 </form>
 
 </body>
+{% endblock %}
 </html>

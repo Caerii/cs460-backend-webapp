@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<h1> Student User: {{username}} </h1>
-<!--<button name="button1" oneclick="location.href = '/'"> Logout </button>-->
+{%extends 'base.html'%}
 
+{%block content%}
+
+{%include 'header.html'%}
+
+<br>
 <form name = "query" method="POST">
 
   {% csrf_token %}
@@ -13,7 +17,5 @@
 
 </form>
 
-<Table>
-  <tr><td><a href="sections/">View Sections</a><td></tr>
-</Table>
+{% endblock %}
 </html>

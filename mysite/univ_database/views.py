@@ -11,6 +11,10 @@ from .models import *
 def admin_home(request):
     """Class view for admin home screen"""
     user = request.user
+    if(user.groups.filter(name='Student').exists()):
+       return redirect('/stud/')
+    if(user.groups.filter(name='Instructor').exists()):
+       return redirect('/instr/')
     username = 'TEST'
     usertype = 'administration'
     template_name = 'admin_home.html'

@@ -1,5 +1,5 @@
 from django.db import models
-from viewflow.fields import CompositeKey
+#from viewflow.fields import CompositeKey
 from django.contrib.auth.models import User
 
 
