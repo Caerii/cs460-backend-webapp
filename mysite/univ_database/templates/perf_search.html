@@ -52,9 +52,7 @@
         <p>Paper By Professor</p>
         {%if PaperError%}
         <h2 Style="color:red">Error:{{PaperError}}</h2>
-    </div>
         {%else%}
-
         <table>
             <tr>
                 <td>Paper Title</td>
@@ -69,8 +67,27 @@
             </tr>
             {%endfor%}
         </table>
-    </div>
         {%endif%}
+    </div>
+
+    <div class='perf_grants'>
+        <p> Grants Received by professor</p>
+        {%if GrantError%}
+        <h2 Style="color:red">Error:{{GrantError}}</h2>
+        {%else%}
+        <table>
+            <tr>
+                <td>Grant Title</td>
+                <td>Grant Ammount</td>
+            </tr>
+            {%for grant in grants%}
+            <tr>
+                <td>{{grant.title}}</td>
+                <td>${{grant.ammount}}</td>
+            </tr>
+            {%endfor%}
+        {%endif%}
+    </div>
 </div>
 {%endif%}
 {%endblock%}

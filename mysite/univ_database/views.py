@@ -81,18 +81,39 @@ def prof_perf(request):
             except DatabaseError as err:
                 dictonary.update({'ClassError':err})
 
-            #try:
-            papers=roster_prof_paper(prof_id)
-            dictonary.update({'papers':papers})
-            # except ValueError as err:
-            #     dictonary.update({'PaperError':err})
-            # except DatabaseError as err:
-            #     dictonary.update({'PaperError':err})
+            try:
+                if not(prof):
+                    raise ValueError("No Instructor Found")
+                papers=roster_prof_paper(prof_id)
+                if not(papers.exists()):
+                    raise ValueError('Querry returned empty results.')
+                else:
+                    dictonary.update({'papers':papers})
+            except ValueError as err:
+                dictonary.update({'PaperError':err})
+            except DatabaseError as err:
+                dictonary.update({'PaperError':err})
+
+            try:
+                if not(prof):
+                    raise ValueError("No Instructor Found")
+                grants=roster_prof_grants(prof_id)
+                if not(grants.exists()):
+                    raise ValueError('No Grants found')
+                else:
+                    dictonary.update({'grants':grants})
+            except ValueError as err:
+                dictonary.update({'GrantError':err})
+            except DatabaseError as err:
+                dictonary.update({'GrantError':err})
+
     else:
         form = prof_perf_form()
         dictonary.update({'form':form})
 
     return render(request, template_name, dictonary)
+
+
 
 
 

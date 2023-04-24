@@ -137,3 +137,12 @@ class Papers(models.Model):
     class Meta:
         managed = False
         db_table = 'papers'
+
+class FundGrants(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True)
+    ammount = models.IntegerField(blank=True, null=True)
+    receiver = models.ForeignKey(Instructor,models.DO_NOTHING,db_column='receiver_id',blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'fund_grants'

@@ -45,9 +45,13 @@ def roster_prof_classes(prof_id:int,year:int,semester:int):
         result = namedtuplefetchall(cursor)
     return result
 
-def roster_prof_paper(prof_id):
+def roster_prof_paper(prof_id:int):
     """Querying Professor Papers from id"""
     return Papers.objects.filter(researcher_id=prof_id)
+
+def roster_prof_grants(prof_id:int):
+    """Querying Professor Grants for research and related research"""
+    return FundGrants.objects.filter(receiver=prof_id)
 
 def namedtuplefetchall(cursor):
     """
