@@ -11,11 +11,13 @@ from .models import *
 def admin_home(request):
     """Class view for admin home screen"""
     user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
     if(user.groups.filter(name='Student').exists()):
        return redirect('/stud/')
     if(user.groups.filter(name='Instructor').exists()):
        return redirect('/instr/')
-    username = 'TEST'
+    username = request.user.username
     usertype = 'administration'
     template_name = 'admin_home.html'
     return render(request, template_name, {'username': username , 'usertype':usertype})
@@ -30,16 +32,30 @@ class roster_prof(generic.ListView):
     
 def dept_index(request):
     """index for viewing departmental salaries. Can lead to a page to list of departmental professors"""
+    user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
+    if(user.groups.filter(name='Student').exists()):
+        return redirect('/stud/')
+    if(user.groups.filter(name='Instructor').exists()):
+        return redirect('/instr/')
     template_name = 'dept_index.html'
-    username = 'TEST'
+    username = request.user.username
     departments = roster_department()
 
     return render(request, template_name, {'departments':departments,"username":username})#'dept_max':dept_max,'dept_min':dept_min,'dept_avg':dept_avg})
 
 def dept_overview(request,dept:str):
     """Gives view on department salary statistics and Instructors under department"""
+    user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
+    if(user.groups.filter(name='Student').exists()):
+        return redirect('/stud/')
+    if(user.groups.filter(name='Instructor').exists()):
+        return redirect('/instr/')
     template_name ='dept_view.html'
-    username = 'TEST'
+    username = request.user.username
     instructors = dept_Instructors(dept)
     max_sal = instructors.aggregate(Max('salary'))
     min_sal = instructors.aggregate(Min('salary'))
@@ -53,14 +69,19 @@ def dept_overview(request,dept:str):
     return render(request, template_name, dictonary)
 
 def course_index(request):
+    if(not request.user.is_authenticated):
+        return redirect('/accounts/login')
     template_name="course_index.html"
-    username=request.user.username
+    username = request.user.username
     courses = roster_courses()
     dictonary = {'username':username,'courses':courses}
 
     return render(request, template_name, dictonary)
 
 def prof_perf(request):
+    if(not request.user.is_authenticated):
+        return redirect('/accounts/login')
+
     template_name="perf_search.html"
     dictonary={}
     method = request.method

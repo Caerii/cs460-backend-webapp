@@ -4,7 +4,7 @@
 {%include "header.html"%}
 
     <h2>Professor Performance Search</h2>
-    {{form.non_feild_errors}}
+    {{form.non_field_errors}}
     <form names='prof_perf_form' method="POST">
         {% csrf_token %}
         {% comment %} <label for='pname'>Professor Name:</label>
@@ -20,7 +20,7 @@
         {{form.pname}} <br>
         <label for='year'>Class Year:</label>
         {{form.year}}<br>
-        <label for'sem'>Class Semester:</label>
+        <label for='sem'>Class Semester:</label>
         {{form.sem}} <br>
         <input type="submit" name='prof_perf_form' value="Submit Query">
     </form>

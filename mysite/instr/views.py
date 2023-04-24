@@ -8,6 +8,15 @@ from .models import *
 # Create your views here.
 
 def instructor_home(request):
+
+    user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
+    if(user.groups.filter(name='Administration').exists()):
+        return redirect('/univ/')
+    if(user.groups.filter(name='Student').exists()):
+        return redirect('/stud/')
+
     if request.method == "POST":
 
         if 'sec_query' in request.POST:
@@ -21,18 +30,34 @@ def instructor_home(request):
             yr = (int)(request.POST.get('year'))
             return redirect(reverse('instr:student_view', kwargs={'cour' : cour, 'sec' : sec, 'sem' : sem, 'yr' : yr}))
 
-    username = 'TEST'
+    username = request.user.username
     usertype = 'instructor'
     template_name = 'instructor_home.html'
     return render(request, template_name, {'username': username, 'usertype': usertype})
 
 def sections_view(request, sem, name):
 
+    user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
+    if(user.groups.filter(name='Administration').exists()):
+        return redirect('/univ/')
+    if(user.groups.filter(name='Student').exists()):
+        return redirect('/stud/')
+
     template_name = 'sections_view.html'
     section_list = sections_by_prof(sem, name)
     return render(request, template_name, {'section_list' : section_list})
 
 def student_view(request, cour, sec, sem, yr):
+
+    user = request.user
+    if(not user.is_authenticated):
+        return redirect('/accounts/login')
+    if(user.groups.filter(name='Administration').exists()):
+        return redirect('/univ/')
+    if(user.groups.filter(name='Student').exists()):
+        return redirect('/stud/')
 
     template_name = 'student_view.html'
     student_list = students_by_section(cour, sec, sem, yr)
