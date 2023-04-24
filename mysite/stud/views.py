@@ -14,8 +14,9 @@ def student_home(request):
         return redirect(reverse('stud:course_view', kwargs={'sem' : sem, 'yr' : yr}))
 
     username = 'TEST'
+    usertype = 'student'
     template_name = 'student_home.html'
-    return render(request, template_name, {'username': username})
+    return render(request, template_name, {'username': username, 'usertype': usertype})
 
 def course_view(request, sem, yr):
 

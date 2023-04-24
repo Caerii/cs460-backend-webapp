@@ -22,8 +22,9 @@ def instructor_home(request):
             return redirect(reverse('instr:student_view', kwargs={'cour' : cour, 'sec' : sec, 'sem' : sem, 'yr' : yr}))
 
     username = 'TEST'
+    usertype = 'instructor'
     template_name = 'instructor_home.html'
-    return render(request, template_name, {'username': username})
+    return render(request, template_name, {'username': username, 'usertype': usertype})
 
 def sections_view(request, sem, name):
 
