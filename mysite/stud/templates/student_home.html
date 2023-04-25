@@ -10,7 +10,10 @@
 
   {% csrf_token %}
   <label for="semester">Semester:</label><br>
-  <input type="text" id="semester" name="semester"><br>
+  <select name='semester' id='semester'>
+    <option value='1'>Fall</option>
+    <option value='2'>Spring</option>
+  </select><br> 
   <label for="year">Year:</label><br>
   <input type="text" id="year" name="year">
   <button type = submit>Search</button>

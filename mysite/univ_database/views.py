@@ -20,13 +20,26 @@ def admin_home(request):
     template_name = 'admin_home.html'
     return render(request, template_name, {'username': username , 'usertype':usertype})
 
-class roster_prof(generic.ListView):
+def prof_index(request):
     """View for viewing list of professors"""
-    context_object_name = 'prof_list'
+    post=request.method
+    print(post)
     template_name = 'roster_prof.html'
+    if request.method == "GET":
+        sort=instr_sort1(request.GET)
+        print('dam')
+        print(sort['sort'].value())
+        if 'sort' in request.GET:
+            print('yea')
+            prof_list=roster_prof(sort['sort'].value())
+            print(sort['sort'].value())
+        else:
+            prof_list=roster_prof('name')
+    else:
+        sort=instr_sort1()
+        prof_list=roster_prof('name')
 
-    def get_queryset(self):
-        return roster_prof_name()
+    return render(request, template_name, {'prof_list':prof_list , 'sort':sort})
     
 def dept_index(request):
     """index for viewing departmental salaries. Can lead to a page to list of departmental professors"""
@@ -34,7 +47,7 @@ def dept_index(request):
     username = 'TEST'
     departments = roster_department()
 
-    return render(request, template_name, {'departments':departments,"username":username})#'dept_max':dept_max,'dept_min':dept_min,'dept_avg':dept_avg})
+    return render(request, template_name, {'departments':departments})#'dept_max':dept_max,'dept_min':dept_min,'dept_avg':dept_avg})
 
 def dept_overview(request,dept:str):
     """Gives view on department salary statistics and Instructors under department"""

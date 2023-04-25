@@ -7,3 +7,8 @@ class prof_perf_form(forms.Form):
     SEMESTER = ((1,'Fall'),(2,'Spring'))
     sem = forms.ChoiceField( label="Semester",choices=SEMESTER)
 
+class instr_sort1(forms.Form):
+    "sort select form for instructor"
+    CHOICES =(('name','Name'),('id','ID'),('salary','Salary'))
+    sort = forms.ChoiceField(label='SortBy',choices=CHOICES)
+

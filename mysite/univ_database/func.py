@@ -8,9 +8,9 @@ from django.db.models import Min
 #import later on
 
 
-def roster_prof_name(): 
+def roster_prof(sort_term): 
     """get query list of professors by name """
-    return Instructor.objects.order_by('name')
+    return Instructor.objects.order_by(sort_term)
 
 def roster_prof_dept(dept:str):
     """get query list of professors by department"""

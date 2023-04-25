@@ -1,9 +1,15 @@
 {%extends 'base.html'%}
 
 {%block content%}
-'
+
 {%include "header.html"%}
 <div class= "body">
+
+<form name='instr_sort1'>
+    <label for='SortBy'>Sort By:</label>
+    {{sort.sort}}
+    <input type="submit" name='prof_perf_form' value="Sort">
+</form><br>
 
 {%if prof_list%} <!--Case for if professor list can be found-->
 <table>
@@ -11,6 +17,7 @@
         <td> Professor Name </td>
         <td> Department </td>
         <td> Professor Id </td>
+        <td> Salary </td>
 
     </tr>
     {% for prof in prof_list %}
@@ -18,6 +25,7 @@
             <td>{{ prof.name }}</td>
             <td>{{ prof.dept_name }}</td>
             <td>{{ prof.id }}</td>
+            <td>{{ prof.salary }}
         </tr>
     {% endfor %}
 </table>
