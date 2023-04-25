@@ -1,11 +1,11 @@
 <div class="header">
     <h1>Username: {{user.username}} </h1>  
     <h2>
-        {% if user.user_data.user_type == 1%}
+        {% if user.usertype == administration %}
         UserType: administration 
-        {%elif user.user_data.user_type == 2%}
+        {% elif user.usertype == instructor %}
         UserType: Instructor
-        {%elif user.user_data.user_type == 3%}
+        {% elif user.usertype == student %}
         Usertype: Student
         {% endif %}
          <button><a href="{% url 'logout' %}">Log Out</a></button></h2>

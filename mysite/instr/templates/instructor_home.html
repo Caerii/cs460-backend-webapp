@@ -10,25 +10,35 @@
 <form name = "sec_query" method="POST">
 
     {% csrf_token %}
-    <label for="name">Professor Name:</label><br>
-    <input type="text" id="name" name="name"><br>
-    <label for="semester">Semester:</label><br>
-    <input type="text" id="semester" name="semester">
+    <label for="name">Professor Name: </label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="semester">Semester: </label>
+    <select name='semester' id='semester'>
+        <option value='1'>Fall</option>
+        <option value='2'>Spring</option>
+    </select><br><br>
     <button type = submit name = "sec_query">Search</button>
 
 </form>
-<br>
+<br><br><br>
 <form name = "stud_query" method="POST">
 
     {% csrf_token %}
-    <label for="course">Course Name:</label><br>
-    <input type="text" id="course" name="course"><br>
-    <label for="section">Section:</label><br>
-    <input type="text" id="section" name="section"><br>
-    <label for="semester2">Semester:</label><br>
-    <input type="text" id="semester2" name="semester2"><br>
-    <label for="year">Year:</label><br>
-    <input type="text" id="year" name="year">
+    <label for="course">Course Name: </label>
+    <input type="text" id="course" name="course"><br><br>
+    <label for="section">Section: </label>
+    <select name='section' id='section'>
+        <option value='01'>01</option>
+        <option value='02'>02</option>
+        <option value ='03'>03</option>
+    </select><br><br>
+    <label for="semester2">Semester: </label>
+    <select name='semester2' id='semester2'>
+        <option value='1'>Fall</option>
+        <option value='2'>Spring</option>
+    </select><br><br>
+    <label for="year">Year: </label>
+    <input type="text" id="year" name="year"><br><br>
     <button type = submit name = "stud_query">Search</button>
 
 </form>

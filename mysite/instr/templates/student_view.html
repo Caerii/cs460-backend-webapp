@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+{%extends 'base.html'%}
+
+{%block content%}
+
+{%include "header.html"%}
+
+<body>
+<br>
 {%if student_list%}
 <table>
     <tr>
@@ -29,4 +32,5 @@
 {%endif%}
 
 </body>
+{% endblock %}
 </html>
