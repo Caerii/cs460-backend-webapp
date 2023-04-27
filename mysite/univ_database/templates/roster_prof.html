@@ -4,13 +4,14 @@
 
 {%include "header.html"%}
 <div class= "body">
-
+{%comment%}
 <form name='instr_sort1'>
     <label for='SortBy'>Sort By:</label>
     {{sort.sort}}
-    <input type="submit" name='prof_perf_form' value="Sort">
+    <input type="submit" name='submit' value="Sort">
 </form><br>
-
+<!-- Not finished due to time-->
+{%endcomment%}
 {%if prof_list%} <!--Case for if professor list can be found-->
 <table>
     <tr>

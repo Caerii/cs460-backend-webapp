@@ -37,11 +37,13 @@
                     <tr>
                         <td>ClassID</td>
                         <td>Section</td>
+                        <td>Total Students</td>
                     <tr>
                     {%for Te in Teach%}
                     <tr>
                         <td>{{Te.course_id}}</td>
                         <td>{{Te.sec_id}}</td>
+                        <td>{{Te.tot_stud}}</td>
                     </tr>
                 {% endfor%}
                 </table>

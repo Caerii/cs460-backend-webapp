@@ -39,9 +39,12 @@ def roster_courses():
 def roster_prof_classes(prof_id:int,year:int,semester:int):
     """Querrying Professor classes by year and semester"""
     with connection.cursor() as cursor:
-        cursor.execute("""select te.course_id, te.sec_id
-                        from teaches te
-                        where te.teacher_id = %s and te.year = %s and te.semester = %s""" ,(str(prof_id),str(year),str(semester)))
+        cursor.execute("""select te.course_id, te.sec_id,count(ta.student_id) as tot_stud
+                        from teaches te, takes ta
+                        where te.teacher_id = %s and te.year = %s and te.semester = %s 
+                        and te.course_id=ta.course_id and te.sec_id=ta.sec_id
+                        and te.semester=ta.semester
+                        group by ta.course_id ,ta.semester, ta.sec_id""" ,(str(prof_id),str(year),str(semester)))
         result = namedtuplefetchall(cursor)
     return result
 
