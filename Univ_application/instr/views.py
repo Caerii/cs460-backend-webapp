@@ -46,8 +46,9 @@ def sections_view(request, sem, name):
         return redirect('/stud/')
 
     template_name = 'sections_view.html'
+    usertype = 'instructor'
     section_list = sections_by_prof(sem, name)
-    return render(request, template_name, {'section_list' : section_list})
+    return render(request, template_name, {'section_list' : section_list, 'usertype' : usertype})
 
 def student_view(request, cour, sec, sem, yr):
 
@@ -60,5 +61,6 @@ def student_view(request, cour, sec, sem, yr):
         return redirect('/stud/')
 
     template_name = 'student_view.html'
+    usertype = 'instructor'
     student_list = students_by_section(cour, sec, sem, yr)
-    return render(request, template_name, {'student_list' : student_list})
+    return render(request, template_name, {'student_list' : student_list, 'usertype' : usertype})

@@ -9,11 +9,15 @@
 <form name = "query" method="POST">
 
   {% csrf_token %}
+  <label for="department">Department: </label>
+  <input type="text" id="department" name="department"><br><br>
+
   <label for="semester">Semester: </label>
   <select name='semester' id='semester'>
     <option value='1'>Fall</option>
     <option value='2'>Spring</option>
   </select><br><br>
+
   <label for="year">Year: </label>
   <input type="text" id="year" name="year"><br><br>
   <button type = submit>Search</button>
