@@ -120,6 +120,14 @@ def prof_perf(request):
                 dictonary.update({'ClassError':err})
 
             try:
+                total = roster_prof_totstud(prof_id,form['year'].value(),form['sem'].value())
+                dictonary.update({'tot':total})
+            except ValueError as err:
+                dictonary.update({'totError':err})
+            except DatabaseError as err:
+                dictonary.update({'totError':err})
+
+            try:
                 if not(prof):
                     raise ValueError("No Instructor Found")
                 papers=roster_prof_paper(prof_id)

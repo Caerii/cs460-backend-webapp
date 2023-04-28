@@ -48,6 +48,18 @@ def roster_prof_classes(prof_id:int,year:int,semester:int):
         result = namedtuplefetchall(cursor)
     return result
 
+def roster_prof_totstud(prof_id:int, year:int, semester:int):
+    """gives total students a professor taught in a semester. Could have been merged with previous function"""
+    with connection.cursor() as cursor:
+        cursor.execute("""select count(Distinct ta.student_id) as tot
+                    from teaches te, takes ta
+                    where te.teacher_id = %s and te.year = %s and te.semester = %s 
+                        and te.course_id=ta.course_id and te.sec_id=ta.sec_id
+                        and te.semester=ta.semester""",(str(prof_id),str(year),str(semester)))
+        result = namedtuplefetchall(cursor)
+    return result
+
+
 def roster_prof_paper(prof_id:int):
     """Querying Professor Papers from id"""
     return Papers.objects.filter(researcher_id=prof_id)
@@ -55,6 +67,7 @@ def roster_prof_paper(prof_id:int):
 def roster_prof_grants(prof_id:int):
     """Querying Professor Grants for research and related research"""
     return FundGrants.objects.filter(receiver=prof_id)
+
 
 def namedtuplefetchall(cursor):
     """

@@ -47,6 +47,11 @@
                     </tr>
                 {% endfor%}
                 </table>
+                {%if totError%}
+                    <h2 Style="color:red">Error:{{totError}}</h2>
+                    {%else%}
+                    <p> Total Student taught: {{tot.0.tot}}
+                    {%endif%}
         {%endif%}
     </div>
 
